@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+
+        <h4>Desea eliminar el registro {{ ejemplar.name}} ?</h4>
+        <button class="btn btn-danger" type="submit">Si, Eliminar</button>
+        <a href="{% url 'ejemplar:listejemplar' %}" class="btn btn-primary">Cancelar</a>
+    </form>
+{% endblock %}
+
