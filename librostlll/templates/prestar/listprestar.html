@@ -1,0 +1,56 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+
+    <h1 class="pull-right">
+        <div class="row">
+            <div class="col-4">
+                <h3>Listado de Prestados</h3>
+            </div>
+            <div class="col-4">
+                
+            </div>
+            <div class="col-4">
+                <a href="{% url 'prestar:prestarCreate' %}" class="btn btn-primary" style="margin-top: -10px; margin-bottom: 5px;">Adicionar</a>
+            </div>
+        </div>
+
+    </h1>
+
+        <table class="table table success table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Ejemplares</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Fecha dev</th>
+                <th scope="col">Fecha pres</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% if prestars %}
+                    {% for prestar in prestars %}
+                        <tr>
+                            <td>{{ prestar.id }}</td>
+                            <td>{{ prestar.ejemplares.libro }}</td>
+                            <td>{{ prestar.user }}</td>
+                            <td>{{ prestar.fecha_dev }}</td>
+                            <td>{{ prestar.fecha_pres }}</td>
+                            <td>
+                                <a href="{% url 'prestar:prestarUpdate' prestar.id %}" class="btn btn-warning">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a href="{% url 'prestar:prestarDelete' prestar.id %}" class="btn btn-danger">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                        <h3>No existen registros</h3>
+                {% endif %}
+            </tbody>
+        </table>
+
+{% endblock %}
