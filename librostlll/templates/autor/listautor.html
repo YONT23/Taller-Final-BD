@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+
+    <h1 class="pull-right">
+        <div class="row">
+            <div class="col-4">
+                <h3>Listado de Autores</h3>
+            </div>
+            <div class="col-4">
+                
+            </div>
+            <div class="col-4">
+                <a href="{% url 'autor:autorCreate' %}" class="btn btn-primary" style="margin-top: -10px; margin-bottom: 5px;">Adicionar</a>
+            </div>
+        </div>
+
+    </h1>
+
+        <table class="table table success table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                {% if autores %}
+                    {% for autor in autores %}
+                        <tr>
+                            <td>{{ autor.id }}</td>
+                            <td>{{ autor.nombre }}</td>
+                            <td>
+                                <a href="{% url 'autor:autorUpdate' autor.id %}" class="btn btn-warning">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a href="{% url 'autor:autorDelete' autor.id %}" class="btn btn-danger">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                        <h3>No existen registros</h3>
+                {% endif %}
+            </tbody>
+        </table>
+
+{% endblock %}
